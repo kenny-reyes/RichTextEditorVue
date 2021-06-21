@@ -1,42 +1,45 @@
 <template>
   <div id="app">
-    <HelloWorld v-model="lessonItem.text" :label="label" :rules="rule.text" />
+    <RichText v-model="lessonItem.text" />
+    <v-spacer />
     <TextBox :value.sync="lessonItem.text" :label="label" :rules="rule.text" />
     <span>{{ lessonItem.text }}</span>
+
+    <div class="ql-editor" v-html="lessonItem.text"></div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/RichText.vue";
+import RichText from "./components/RichText.vue";
 import TextBox from "./components/TextBox";
 
 export default {
   name: "App",
   components: {
     TextBox,
-    HelloWorld,
+    RichText,
   },
   data() {
     return {
       lessonItem: {
         id: 0,
-        code: '',
-        name: '',
-        description: '',
-        text: '',
-        difficulty: '',
+        code: "",
+        name: "",
+        description: "",
+        text: "",
+        difficulty: "",
         order: 0,
         topicId: 0,
         programId: 0,
-        duration: '00:10:00',
+        duration: "00:10:00",
       },
-      label: 'Hola'
+      label: "Hola",
     };
   },
   computed: {
     rule() {
       return {
-        text: [(v) => !!v || 'common.rules.required']
+        text: [(v) => !!v || "common.rules.required"],
       };
     },
   },
@@ -44,12 +47,11 @@ export default {
     lesson: {
       handler: function (lesson) {
         let lessonAux;
-        lessonAux.form.text = "Hola"
-        this.lessonItem = Object.assign({ }, lesson);
+        lessonAux.form.text = "Hola";
+        this.lessonItem = Object.assign({}, lesson);
       },
     },
   },
-
 };
 </script>
 

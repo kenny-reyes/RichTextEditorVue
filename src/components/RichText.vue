@@ -10,39 +10,40 @@ import _Quill from "quill";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+import undo_icon from "quill/assets/icons/undo.svg";
+import redo_icon from "quill/assets/icons/redo.svg";
 
 const Quill = window.Quill || _Quill;
+var icons = Quill.import("ui/icons");
+icons["undo"] = undo_icon;
+icons["redo"] = redo_icon;
+
 const defaultOptions = {
   theme: "snow",
   boundary: document.body,
   modules: {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
-      ["blockquote", "code-block"],
-      ["undo", "redo"],
-      [{ header: 1 }, { header: 2 }],
+      [({ header: 1 }, { header: 2 })],
       [{ list: "ordered" }, { list: "bullet" }],
       [{ script: "sub" }, { script: "super" }],
       [{ indent: "-1" }, { indent: "+1" }],
-      [{ direction: "rtl" }],
       [{ size: ["small", false, "large", "huge"] }],
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       [{ color: [] }, { background: [] }],
       [{ font: [] }],
       [{ align: [] }],
       ["clean"],
-      ["link", "image", "video"]
+      ["blockquote", "code-block", "link", "image", "video"],
     ],
-    modules: {
-      history: {
-        delay: 2000,
-        maxStack: 500,
-        userOnly: true
-      }
-    }
+    history: {
+      delay: 2000,
+      maxStack: 500,
+      userOnly: true,
+    },
   },
   placeholder: "Insert text here ...",
-  readOnly: false
+  readOnly: false,
 };
 
 if (typeof Object.assign != "function") {
@@ -65,7 +66,7 @@ if (typeof Object.assign != "function") {
       return to;
     },
     writable: true,
-    configurable: true
+    configurable: true,
   });
 }
 
@@ -75,7 +76,7 @@ export default {
     return {
       options2: {},
       content2: "",
-      defaultOptions
+      defaultOptions,
     };
   },
   props: {
@@ -83,18 +84,18 @@ export default {
     value: String,
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     options: {
       type: Object,
       required: false,
-      default: () => ({})
+      default: () => ({}),
     },
     globalOptions: {
       type: Object,
       required: false,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   mounted() {
     this.initialize();
@@ -125,7 +126,7 @@ export default {
           this.quill.enable(true);
         }
 
-        this.quill.on("selection-change", range => {
+        this.quill.on("selection-change", (range) => {
           if (!range) {
             this.$emit("blur", this.quill);
           } else {
@@ -145,7 +146,7 @@ export default {
 
         this.$emit("ready", this.quill);
       }
-    }
+    },
   },
   watch: {
     content(newVal) {
@@ -172,7 +173,7 @@ export default {
       if (this.quill) {
         this.quill.enable(!newVal);
       }
-    }
-  }
+    },
+  },
 };
 </script>yanr

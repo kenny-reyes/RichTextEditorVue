@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld :value.sync="lessonItem.text" :label="label" :rules="rule.text" />
+    <HelloWorld v-model="lessonItem.text" :label="label" :rules="rule.text" />
     <TextBox :value.sync="lessonItem.text" :label="label" :rules="rule.text" />
     <span>{{ lessonItem.text }}</span>
   </div>

@@ -19,6 +19,7 @@ const defaultOptions = {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
       ["blockquote", "code-block"],
+      ["undo", "redo"],
       [{ header: 1 }, { header: 2 }],
       [{ list: "ordered" }, { list: "bullet" }],
       [{ script: "sub" }, { script: "super" }],
@@ -30,11 +31,18 @@ const defaultOptions = {
       [{ font: [] }],
       [{ align: [] }],
       ["clean"],
-      ["link", "image", "video"],
+      ["link", "image", "video"]
     ],
+    modules: {
+      history: {
+        delay: 2000,
+        maxStack: 500,
+        userOnly: true
+      }
+    }
   },
   placeholder: "Insert text here ...",
-  readOnly: false,
+  readOnly: false
 };
 
 if (typeof Object.assign != "function") {
@@ -57,7 +65,7 @@ if (typeof Object.assign != "function") {
       return to;
     },
     writable: true,
-    configurable: true,
+    configurable: true
   });
 }
 
@@ -67,7 +75,7 @@ export default {
     return {
       options2: {},
       content2: "",
-      defaultOptions,
+      defaultOptions
     };
   },
   props: {
@@ -75,18 +83,18 @@ export default {
     value: String,
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     options: {
       type: Object,
       required: false,
-      default: () => ({}),
+      default: () => ({})
     },
     globalOptions: {
       type: Object,
       required: false,
-      default: () => ({}),
-    },
+      default: () => ({})
+    }
   },
   mounted() {
     this.initialize();
@@ -117,7 +125,7 @@ export default {
           this.quill.enable(true);
         }
 
-        this.quill.on("selection-change", (range) => {
+        this.quill.on("selection-change", range => {
           if (!range) {
             this.$emit("blur", this.quill);
           } else {
@@ -137,7 +145,7 @@ export default {
 
         this.$emit("ready", this.quill);
       }
-    },
+    }
   },
   watch: {
     content(newVal) {
@@ -164,7 +172,7 @@ export default {
       if (this.quill) {
         this.quill.enable(!newVal);
       }
-    },
-  },
+    }
+  }
 };
 </script>yanr

@@ -17,6 +17,9 @@ const Quill = window.Quill || _Quill;
 var icons = Quill.import("ui/icons");
 icons["undo"] = undo_icon;
 icons["redo"] = redo_icon;
+var Size = Quill.import("attributors/style/size");
+Size.whitelist = ["14px", "16px", "18px"];
+Quill.register(Size, true);
 
 const defaultOptions = {
   theme: "snow",
@@ -24,11 +27,11 @@ const defaultOptions = {
   modules: {
     toolbar: [
       ["bold", "italic", "underline", "strike"],
+      [{ size: ["14px", "16px", "18px"] }],
       [({ header: 1 }, { header: 2 })],
       [{ list: "ordered" }, { list: "bullet" }],
       [{ script: "sub" }, { script: "super" }],
       [{ indent: "-1" }, { indent: "+1" }],
-      [{ size: ["small", false, "large", "huge"] }],
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
       [{ color: [] }, { background: [] }],
       [{ font: [] }],

@@ -5,6 +5,9 @@
     <TextBox :value.sync="lessonItem.text" :label="label" :rules="rule.text" />
     <span>{{ lessonItem.text }}</span>
 
+    <div class="ql-container ql-snow" style="border-width: 0">
+      <div class="ql-editor" v-html="lessonItem.text"></div>
+    </div>
     <div class="ql-editor" v-html="lessonItem.text"></div>
   </div>
 </template>

@@ -9,18 +9,22 @@
       <div class="ql-editor" v-html="lessonItem.text"></div>
     </div>
     <div class="ql-editor" v-html="lessonItem.text"></div>
+    <HelloWorld :entrada="lessonItem.text"></HelloWorld>
   </div>
 </template>
 
 <script>
 import RichText from "./components/RichText.vue";
 import TextBox from "./components/TextBox";
+import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
   components: {
     TextBox,
     RichText,
+    HelloWorld
+
   },
   data() {
     return {
